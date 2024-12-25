@@ -4,6 +4,22 @@
 [![Gradle Version](https://img.shields.io/badge/Gradle-8.11-blue)](https://gradle.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://opensource.org/licenses/MIT)
 
+## Quick Usage:
+
+If you're a reviewer in the Sphere IDE, you can quickly evaluate the project tests by running: 
+
+```bash
+make test-app
+```
+
+If you encounter any issues, please download the ZIP attached in the workplace, and run the following commands:
+
+```bash 
+make check-test-docker
+```
+
+Which will run the tests in an isolated environment using Docker.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
