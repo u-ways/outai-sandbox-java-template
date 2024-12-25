@@ -1,13 +1,22 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     alias(libs.plugins.spotless)
     alias(libs.plugins.sonarlint)
+    alias(libs.plugins.jetbrains.kotlin.jvm)
 }
 
 group = "outai.sandbox"
 version = "DEV-SNAPSHOT"
 
 dependencies {
+    implementation(libs.kotlin.reflect)
+
+    testImplementation(libs.mockk.core)
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.wiremock)
@@ -25,6 +34,13 @@ java {
 }
 
 tasks {
+    withType<KotlinCompile> {
+        compilerOptions {
+            freeCompilerArgs.add("-Xjsr305=strict")
+            jvmTarget.set(JvmTarget.JVM_18)
+        }
+    }
+
     withType<Test> {
         useJUnitPlatform()
         jvmArgs(
@@ -43,6 +59,10 @@ tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.compilerArgs.add("-parameters")
+    }
+
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
     }
 }
 
