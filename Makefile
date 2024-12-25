@@ -176,3 +176,12 @@ bundle:
 	cd $(PROJECT_ROOT) && \
 	zip -r $(PROJECT_ROOT)/build/outai-task-artifact.zip . \
 		-x './.gradle/*' -x './.idea/*' -x './.git/*' -x './build/*'
+
+.PHONY: unbundle-in-sphere
+unbundle-in-sphere:
+	echo "******** Unbundling the project (ZIP) in Sphere IDE... ********"
+	mkdir -p ../tmp
+	mv outai-task-artifact.zip ../tmp
+	rm -rf *
+	mv ../tmp/outai-task-artifact.zip .
+	unzip -o outai-task-artifact.zip -d .
