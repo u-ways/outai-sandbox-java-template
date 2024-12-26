@@ -176,7 +176,7 @@ bundle:
 	rm -f $(PROJECT_ROOT)/build/outai-task-artifact.zip
 	cd $(PROJECT_ROOT) && \
 	zip -r $(PROJECT_ROOT)/build/outai-task-artifact.zip . \
-		-x './.gradle/*' -x './.idea/*' -x './.git/*' -x './build/*'
+		-x './.gradle/*' -x './.idea/*' -x './.git/*' -x './build/*' -x './.kotlin'
 
 .PHONY: unbundle-in-sphere
 unbundle-in-sphere:
