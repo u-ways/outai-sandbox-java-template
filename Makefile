@@ -169,6 +169,15 @@ login-into-container:
 
 # Deployment ####################################################################################
 
+.PHONY: new-task
+new-task:
+	@echo "******** Creating a new task branch... ********"
+	DATE=$$(date +'%y-%m-%d'); \
+	TASK_NUMBER=$$(git branch --list "$$DATE/T*" | wc -l); \
+	TASK_NUMBER=$$((TASK_NUMBER + 1)); \
+	BRANCH_NAME=$$DATE/T$$TASK_NUMBER; \
+	git checkout -b $$BRANCH_NAME
+
 .PHONY: bundle
 bundle:
 	@echo "******** Bundling the project (ZIP)... ********"
