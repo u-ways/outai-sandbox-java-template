@@ -173,6 +173,7 @@ login-into-container:
 bundle:
 	@echo "******** Bundling the project (ZIP)... ********"
 	mkdir -p $(PROJECT_ROOT)/build
+	rm -f $(PROJECT_ROOT)/build/outai-task-artifact.zip
 	cd $(PROJECT_ROOT) && \
 	zip -r $(PROJECT_ROOT)/build/outai-task-artifact.zip . \
 		-x './.gradle/*' -x './.idea/*' -x './.git/*' -x './build/*'
