@@ -1,11 +1,10 @@
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-
 import org.junit.jupiter.api.Test;
 
 class MainTest {
     @Test
-    void testHelloWorld() {
-        assertThat("Hello, World!", is("Hello, World!"));
+    void smokeTestMain() {
+        System.out.println("Smoke testing Main.main()");
+        System.out.println("Result: ");
+        Main.main(new String[0]);
     }
 }
