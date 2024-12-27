@@ -176,7 +176,7 @@ new-task:
 	TASK_NUMBER=$$(git branch --list "$$DATE/T*" | wc -l); \
 	TASK_NUMBER=$$((TASK_NUMBER + 1)); \
 	BRANCH_NAME=$$DATE/T$$TASK_NUMBER; \
-	git checkout -b $$BRANCH_NAME
+	git checkout main && git checkout -b $$BRANCH_NAME
 
 .PHONY: bundle
 bundle:
@@ -185,7 +185,7 @@ bundle:
 	rm -f $(PROJECT_ROOT)/build/outai-task-artifact.zip
 	cd $(PROJECT_ROOT) && \
 	zip -r $(PROJECT_ROOT)/build/outai-task-artifact.zip . \
-		-x './.gradle/*' -x './.idea/*' -x './.git/*' -x './build/*' -x './.kotlin'
+		-x './.gradle/*' -x './.idea/*' -x './.git/*' -x './build/*' -x './.kotlin/*'
 
 .PHONY: unbundle-in-sphere
 unbundle-in-sphere:
