@@ -171,6 +171,10 @@ login-into-container:
 
 .PHONY: new-task
 new-task:
+	@echo "******** Committing and pushing everything before moving on... ********"
+	if [ "$(shell git branch --show-current)" != "main" ]; then \
+		git add . && git commit -m "complete: final changes" && git push; \
+	fi
 	@echo "******** Creating a new task branch... ********"
 	DATE=$$(date +'%y-%m-%d'); \
 	TASK_NUMBER=$$(git branch --list "$$DATE/T*" | wc -l); \
