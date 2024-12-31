@@ -174,15 +174,26 @@ new-task:
 	@echo "******** Committing and pushing everything before moving on... ********"
 	if [ "$(shell git branch --show-current)" != "main" ]; then \
 		if [ -n "$$(git status --porcelain)" ]; then \
-			git add . && git commit -m "complete: final changes" && git push; \
+			git add . && git commit -m "complete: final changes" && git push origin $(shell git branch --show-current); \
 		fi; \
 	fi
 	@echo "******** Creating a new task branch... ********"
 	DATE=$$(date +'%y-%m-%d'); \
-	TASK_NUMBER=$$(git branch --list "$$DATE/T*" | wc -l); \
-	TASK_NUMBER=$$((TASK_NUMBER + 1)); \
-	BRANCH_NAME=$$DATE/T$$TASK_NUMBER; \
+	TIME=$$(date +'%H-%M'); \
+	BRANCH_NAME=$$DATE/$$TIME; \
 	git checkout main && git checkout -b $$BRANCH_NAME
+
+.PHONY: new-task-cont
+new-task-cont:
+	@echo "******** Committing and pushing everything before moving on... ********"
+	if [ -n "$$(git status --porcelain)" ]; then \
+		git add . && git commit -m "complete: final changes" && git push origin $(shell git branch --show-current); \
+	fi
+	@echo "******** Creating a new task branch... ********"
+	DATE=$$(date +'%y-%m-%d'); \
+	TIME=$$(date +'%H-%M'); \
+	BRANCH_NAME=$$DATE/$$TIME; \
+	git checkout $(shell git branch --show-current) && git checkout -b $$BRANCH_NAME
 
 .PHONY: bundle
 bundle:
